@@ -1,5 +1,5 @@
 //      RCL     0=5k ,1 =10k, 2=50k, 3=200k, 4=750k, 5-=3.5M, 6=15M, 7=70M, 8=300M
-var REPAIR_CAP = [5e3, 10e3, 50e3, 200e3, 750e3, 3.5e6, 15e6, 70e6, 300e6];
+var REPAIR_CAP = [5e3, 10e3, 50e3, 200e3, 500e3, 1e6, 2e6, 10e6, 300e6];
 var roleBuilder = {
 
     /** @param {Creep} creep **/

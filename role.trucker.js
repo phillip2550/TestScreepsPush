@@ -55,7 +55,7 @@ var roleTrucker = {
         else {
             var sources  = creep.room.find(FIND_STRUCTURES, {
                             filter: (structure) => {
-                                return( structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >750);
+                                return( structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity);
                             }
             });
             if (sources.length == 0){ //if no containers are above 250, pull from storage? (and put it back?)
@@ -68,6 +68,11 @@ var roleTrucker = {
             } 
             if (sources.length == 0){
                 creep.say('🚫');
+                sources = creep.room.find(FIND_DROPPED_RESOURCES, {
+                    filter: (e) => {
+                        return (e.energy >= 50)
+                    }
+                });
             }
             else {
                 sources.sort(function(a,b) {

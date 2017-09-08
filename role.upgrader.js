@@ -33,22 +33,9 @@ var roleUpgrader = {
                 }
             }
         }
-        
     }
 };
- /*       else {
-            var sources  = creep.room.find(FIND_STRUCTURES, {
-                            filter: (structure) => {
-                                return( structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > creep.carryCapacity);
-                            }
-            });
-            if (sources.length == 0)
-                creep.say('🚫');
-            if(creep.withdraw(sources[0],RESOURCE_ENERGY,creep.carryCapacity) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
-        }
-    }
-}; */
+// Need somehow to place a controller container / link
+
 
 module.exports = roleUpgrader;

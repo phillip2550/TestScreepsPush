@@ -4,11 +4,13 @@ var roleBuilder = require('role.builder');
 var roleTrucker = require('role.trucker');
 var roleBarbarian = require('role.barbarian');
 var hiveQueen = require('hive.queen');
+var hiveMind = require('hive.mind');
 
 module.exports.loop = function () {
+    console.log('Tick',Game.time);
 
-// Okay so this is an issue hard coded tower ID...
-    const towers = ['59a316b49c967103349eec6b','598eac51e448e2290ebfe86f']
+// Okay so this is an issue hard coded tower ID(s)...
+    const towers = ['59a316b49c967103349eec6b','598eac51e448e2290ebfe86f'];
     for (var i = 0; i < towers.length; i++) {
         var tower = Game.getObjectById(towers[i]);
        // console.log(tower)
@@ -52,6 +54,9 @@ module.exports.loop = function () {
 
     }
     
+    for(var roomName in Game.rooms){
+        hiveMind(roomName);
+    }
     if(Game.time % 27 == 0) {
         for(var name in Memory.creeps) {
             if(!Game.creeps[name]) {
