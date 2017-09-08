@@ -12,21 +12,55 @@ Run this periodically, clean out the memory and refresh using find()
 */
 
 //FIND AND STORE ROOMS BY ID
-var hiveMind = function() {
-    // ok so need to decide what to update into memory
-    // when to update memory
-    if(Game.time % 27 == 0) {
-        for(var name in Memory.creeps) {
-            if(!Game.creeps[name]) {
-                delete Memory.creeps[name];
-                console.log('Clearing non-existing creep memory:', name);
-            }
+var hiveMind = function(roomName) {
+    //okay so i'm running this inside or outside of the room loop?
+    // INSIDE!
+    // run this for each room that is visable each loop. (AKA make sure it is not too heavy or it will eat my bucket!)
+    
+    // check if memory object exists?
+    //if(Game.room[roomName].memory){
+    if(!Memory.rooms.hasOwnProperty(roomName)){
+        // generate empty object
+        Game.rooms[roomName].memory = {
+            RCL: Game.rooms[roomName].controller.level,
+            owner: Game.rooms[roomName].controller.owner.username,
+            resources: {
+                sourceIds:  [],
+                mineralIds: [],
+            },
+            structureIds:   {
+                spawnIds:       [],
+                towerIds:       [],
+                extensionIds:   [],
+                containerIds:   [],
+                linkIds:        [],
+                labIds:         [],
+            },
+            spawnNumber: 0
+            
         }
+        // populate the structure also? or just leave it and have a populate function later?
+        for (var source of Game.rooms[roomName].find(FIND_SOURCES)) {
+            console.log('found source', source,'in room', roomName);
+            Game.rooms[roomName].memory.resources.sourceIds.push(source.id);
+        }
+        for (var mineral of Game.rooms[roomName].find(FIND_MINERALS)) {
+            Game.rooms[roomName].memory.resources.mineralIds.push(mineral.id);
+        }
+    }
+    else {
+        // room found in memory!
+        // maybe start updating structures? verify who owns the room? idk?
     }
     
     
 };
 module.exports = hiveMind;
+/*
+really this should be my room controler or my room memory manager (one and the same?)
+*/
+
+
 
 /*
 Memory should store the following:
